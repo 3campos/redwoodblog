@@ -1,4 +1,4 @@
-import { Link, routes } from '@redwoodjs/router'
+import { Form, TextField, TextAreaField, Submit } from '@redwoodjs/forms'
 import { MetaTags } from '@redwoodjs/web'
 
 const ContactPage = () => {
@@ -6,14 +6,18 @@ const ContactPage = () => {
     <>
       <MetaTags title="Contact" description="Contact page" />
 
-      <h1>ContactPage</h1>
-      <p>
-        Find me in <code>./web/src/pages/ContactPage/ContactPage.js</code>
-      </p>
-      <p>
-        My default route is named <code>contact</code>, link to me with `
-        <Link to={routes.contact()}>Contact</Link>`
-      </p>
+      <Form>
+        <label>Name</label>
+        <TextField name="name" />
+
+        <label>Email</label>
+        <TextField name="email" />
+
+        <label>Message</label>
+        <TextAreaField name="message" />
+
+        <Submit>Send Message</Submit>
+      </Form>
     </>
   )
 }
