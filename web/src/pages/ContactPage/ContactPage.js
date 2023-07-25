@@ -4,6 +4,7 @@ import {
   TextAreaField,
   Submit,
   FieldError,
+  Label,
 } from '@redwoodjs/forms'
 import { MetaTags } from '@redwoodjs/web'
 
@@ -16,17 +17,31 @@ const ContactPage = () => {
       <MetaTags title="Contact" description="Contact page" />
 
       <Form onSubmit={onSubmit}>
-        <label>Name</label>
-        <TextField name="name" validation={{ required: true }} />
-        <FieldError name="name" />
+        <Label name="name" errorClassName="error">
+          Name
+        </Label>
+        <TextField
+          name="name"
+          errorClassName="error"
+          validation={{ required: true }}
+        />
+        <FieldError name="name" className="error" />
 
-        <label>Email</label>
-        <TextField name="email" validation={{ required: true }} />
-        <FieldError name="email" />
+        <Label name="email">Email</Label>
+        <TextField
+          name="email"
+          errorClassName="error"
+          validation={{ required: true }}
+        />
+        <FieldError name="email" className="error" />
 
-        <label>Message</label>
-        <TextAreaField name="message" validation={{ required: true }} />
-        <FieldError name="message" />
+        <Label name="message">Message</Label>
+        <TextAreaField
+          name="message"
+          errorClassName="error"
+          validation={{ required: true }}
+        />
+        <FieldError name="message" className="error" />
 
         <Submit>Send Message</Submit>
       </Form>
