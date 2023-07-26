@@ -18,7 +18,7 @@ const CREATE_CONTACT = gql`
 // The above is a mutation query
 
 const ContactPage = () => {
-  const [create] = useMutation(CREATE_CONTACT)
+  const [create, { loading }] = useMutation(CREATE_CONTACT)
   const onSubmit = (data) => {
     console.log(data)
     create({
@@ -69,7 +69,8 @@ const ContactPage = () => {
         />
         <FieldError name="message" className="error" />
 
-        <Submit>Save</Submit>
+        <Submit disabled={loading}>Save</Submit>
+        {/* i.e., if it's loading, the button will be disabled while the post request is in process; otherwise, it's enabled */}
       </Form>
     </>
   )
