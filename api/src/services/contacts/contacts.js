@@ -1,3 +1,5 @@
+import { validate } from '@redwoodjs/api'
+
 import { db } from 'src/lib/db'
 
 export const contacts = () => {
@@ -11,6 +13,8 @@ export const contact = ({ id }) => {
 }
 
 export const createContact = ({ input }) => {
+  validate(input.email, 'email', { email: true })
+  // validate method parameters: field to check; name of the field on the frontend; and how you want to validate
   return db.contact.create({
     data: input,
   })
