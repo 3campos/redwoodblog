@@ -32,3 +32,24 @@ export const deleteContact = ({ id }) => {
     where: { id },
   })
 }
+
+export const createCar = ({ input }) => {
+  validate(input.make, 'make', {
+    inclusion: ['Audi', 'BMW', 'Ferrari', 'Lexus', 'Tesla'],
+  })
+  validate(input.color, 'color', {
+    exclusion: { in: ['Beige', 'Mauve'], message: 'No one wants that color' },
+  })
+  validate(input.hasDamage, 'hasDamage', {
+    absence: true,
+  })
+  validate(input.vin, 'vin', {
+    format: /[A-Z0-9]+/,
+    length: { equal: 17 },
+  })
+  validate(input.odometer, 'odometer', {
+    numericality: { positive: true, lessThanOrEqual: 10000 },
+  })
+
+  return db.car.create({ data: input })
+}
