@@ -5,6 +5,7 @@ import {
   Submit,
   FieldError,
   Label,
+  useForm,
 } from '@redwoodjs/forms'
 import { MetaTags, useMutation } from '@redwoodjs/web'
 import { Toaster, toast } from '@redwoodjs/web/toast'
@@ -19,9 +20,11 @@ const CREATE_CONTACT = gql`
 // The above is a mutation query
 
 const ContactPage = () => {
+  const formMethods = useForm()
   const [create, { loading }] = useMutation(CREATE_CONTACT, {
     onCompleted: () => {
       toast.success('Thank you for your message!')
+      formMethods.reset()
     },
   })
   const onSubmit = (data) => {
@@ -37,7 +40,7 @@ const ContactPage = () => {
     <>
       <MetaTags title="Contact" description="Contact page" />
       <Toaster />
-      <Form onSubmit={onSubmit} config={{ mode: 'onBlur' }}>
+      <Form onSubmit={onSubmit} formMethods={formMethods}>
         <Label name="name" errorClassName="error">
           Name
         </Label>
